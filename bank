@@ -1,0 +1,87 @@
+#include<iostream> 
+using namespace std; 
+class Account 
+{ char name[50]; 
+int acc_no; 
+float min; 
+float balance; 
+public: Account() 
+{ 
+min=0.0; 
+balance=0.0; 
+}
+void withdraw(float debit); 
+void deposit(float credit); 
+void read(); 
+void display(); 
+};
+void Account::withdraw(float debit) 
+{ 
+if(debit>balance) 
+{ 
+cout<<"Insuffiecient balance!\n"; 
+return; 
+}
+if((balance-debit)<min) 
+{ 
+cout<<"Cannot withdraw!Need to maintain minimum balance!\n"; 
+return; 
+}
+balance=balance-debit; 
+cout<<"Amount of Rs."<<debit<<" successfully debitted from your account\n"; 
+}
+void Account::deposit(float credit) 
+{ 
+balance=balance+credit; 
+cout<<"Amount of Rs."<<credit<<" successfully creditted to your account\n"; 
+}
+void Account::display() 
+{ 
+cout<<"Account holder name:"<<name<<"\n"; 
+cout<<"Account No.:"<<acc_no<<"\n"; 
+cout<<"Balance:Rs."<<balance<<" CR\n"; 
+}
+void Account::read() 
+{ 
+cout<<"Enter the name of the account holder:\n"; 
+cin>>name; 
+cout<<"Enter minimum balance:\n"; 
+cin>>min; 
+cout<<"Enter the account number:\n"; 
+cin>>acc_no; 
+cout<<"Enter current balance:\n"; 
+cin>>balance; 
+}
+int main() 
+{ 
+Account a1; 
+a1.read(); 
+char ch='y';while(ch=='y') 
+{ int op; 
+cout<<"1.Deposit\n2.Withdraw\n3.View Balance\nEnter your choice:\n"; 
+cin>>op; 
+switch(op) 
+{ 
+case 1: float amt1; 
+cout<<"Enter the amount to be deposited:Rs.\n"; 
+cin>>amt1; 
+a1.deposit(amt1); 
+break; 
+case 2: float amt2; 
+cout<<"Enter the amount to be withdrawn:Rs.\n"; 
+cin>>amt2; 
+a1.withdraw(amt2); 
+break; 
+case 3: a1.display(); 
+break; 
+default:cout<<"Check your input!\n"; 
+}
+cout<<"Do you wanna to continue?(y/n)"; 
+cin>>ch; 
+if(ch=='n' || ch=='N') 
+{ 
+exit(0); 
+} 
+}
+return 0; 
+}
